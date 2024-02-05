@@ -22,9 +22,10 @@
     <div class="mt-20 flex items-center justify-center mx-60">
         <!-- アイコン画像 -->
         <div class="relative">
-            <div class="w-[320px] h-[320px] bg-gray-300 rounded-full overflow-hidden">
-                <!-- ここにアイコン画像を表示するコードを追加 -->
-                {{-- <img src="{{ asset('path/to/your/avatar.jpg') }}" alt="User Avatar" class="object-cover w-full h-full rounded-full"> --}}
+            <div class="w-[320px] bg-gray-300 h-[320px] rounded-full overflow-hidden flex items-center justify-center">
+                @if(Auth::check())
+                    <img src="{{ asset('storage/avatars/' . Auth::user()->avatar) }}" alt="User Avatar" class="object-cover w-full h-full rounded-full">
+                @endif
             </div>
             <!-- ユーザー名 -->
             <div class="mt-5 ml-28 text-black text-opacity-75 font-bold font-['Roboto']">
@@ -34,14 +35,18 @@
         <!-- 自己紹介 -->
         <div class="ml-20 flex flex-col items-start">
             <div class="text-black text-opacity-75 text-4xl font-bold font-['Roboto']">自己紹介</div>
-            <div class="mt-2 w-40 h-1 bg-black"></div>
+            <div class="mt-2 w-80 h-1 bg-black"></div>
             <div class="mt-5 text-black text-opacity-75 font-normal font-['Roboto']">
-                ここに自己紹介のテキストが入ります。ここに自己紹介のテキストが入ります。ここに自己紹介のテキストが入ります。ここに自己紹介のテキストが入ります。
+                @if(Auth::check())
+                    {{ Auth::user()->introduction }}
+                @else
+                    ここに自己紹介テキストが入ります。ここに自己紹介テキストが入ります。ここに自己紹介テキストが入ります。ここに自己紹介テキストが入ります。
+                @endif
             </div>
             <div class="mt-4">
-                <button class="w-[180px] h-[40px] px-6 py-2 bg-cyan-800 rounded text-white text-sm font-normal font-['Roboto']">
+                <a href="{{ route('profile.edit') }}" class="w-[180px] h-[40px] px-6 py-3 bg-cyan-800 rounded text-white text-sm font-normal font-['Roboto'] hover:bg-cyan-900">
                     自己紹介を編集する
-                </button>
+                </a>
             </div>
         </div>
     </div>
