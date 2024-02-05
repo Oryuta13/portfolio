@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProfileController;
 
 
 Route::get('/', function () {
@@ -16,6 +16,8 @@ Route::post('/register',[\App\Http\Controllers\UserController::class,'register']
 Route::middleware('auth')->group(function (){
     Route::get('/top',[\App\Http\Controllers\UserController::class,'top'])->name('top');
     Route::post('logout',[\App\Http\Controllers\UserController::class,'logout'])->name('user.logout');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 Route::get('/login',[\App\Http\Controllers\UserController::class,'showLogin']);
