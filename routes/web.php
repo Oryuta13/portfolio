@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SkillController;
 
 
 Route::get('/', function () {
@@ -18,6 +19,7 @@ Route::middleware('auth')->group(function (){
     Route::post('logout',[\App\Http\Controllers\UserController::class,'logout'])->name('user.logout');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/skills/index', [SkillController::class, 'index'])->name('skills.index');
 });
 
 Route::get('/login',[\App\Http\Controllers\UserController::class,'showLogin']);
