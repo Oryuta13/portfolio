@@ -57,9 +57,9 @@
         <div class="mt-2 w-80 h-1 bg-black"></div>
         <div class="mt-5">
             <!-- 編集ボタン -->
-            <button class="mt-20 w-[180px] h-[40px] px-6 py-2 bg-cyan-800 rounded text-white text-sm font-normal font-['Roboto']">
+            <a href="{{ route('skills.index') }}" class="mt-20 w-[180px] h-[40px] px-6 py-3 bg-cyan-800 rounded text-white text-sm font-normal font-['Roboto'] hover:bg-cyan-900">
                 編集する
-            </button>
+            </a>
     </div>
 </div>
 
