@@ -19,7 +19,8 @@
     </div>
 
     <!-- ドロップダウンボタン -->
-    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-black bg-gray-100 hover:bg-gray-200 font-bold text-sm px-2.5 py-2 text-center inline-flex items-center shadow mx-20 mt-10" type="button">今月 <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-black bg-gray-100 hover:bg-gray-200 font-bold text-sm px-2.5 py-2 text-center inline-flex items-center shadow mx-20 mt-10" type="button">
+      {{ $selectedMonth ? $selectedMonth : $currentMonth }} <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
     </svg>
     </button>
@@ -27,15 +28,11 @@
     <!-- ドロップダウンメニュー -->
     <div id="dropdown" class="z-10 hidden mx-20 bg-gray-100 divide-y divide-gray-200 shadow" style="width: fit-content;">
         <ul class="py-2 text-sm text-black" aria-labelledby="dropdownDefaultButton">
+          @foreach ($months as $month)
           <li>
-            <a href="#" class="block px-2.5 py-2 hover:bg-gray-200">今月</a>
+            <a href="{{ route('skills.index', ['month' => $month]) }}" class="block px-2.5 py-2 hover:bg-gray-200">{{ $month }}</a>
           </li>
-          <li>
-            <a href="#" class="block px-2.5 py-2 hover:bg-gray-200">先月</a>
-          </li>
-          <li>
-            <a href="#" class="block px-2.5 py-2 hover:bg-gray-200">先々月</a>
-          </li>
+          @endforeach
         </ul>
     </div>
 
@@ -43,31 +40,23 @@
     <div class="mx-20 mt-10 w-200 border border-gray-400 p-6 rounded">
         <div class="flex items-center justify-between mb-6">
             <h2 class="font-bold mb-6 border-b border-gray-500 pb-2" style="width: 30%;">バックエンド</h2>
-            <button class="mb-4 bg-cyan-800 text-white px-4 py-2 rounded hover:bg-cyan-900 cursor-pointer">項目を追加する</button>
+            <button onclick="location.href='{{ route('skills.create', ['category' => 1, 'month' => $selectedMonth]) }}'" class="mb-4 bg-cyan-800 text-white px-4 py-2 rounded hover:bg-cyan-900 cursor-pointer">項目を追加する</button>
         </div>
         <div class="border border-gray-400 rounded shadow">
-            <div class="mb-4 border-b border-gray-400 p-4 flex justify-between items-center">
+            <div class="border-b border-gray-400 p-4 flex justify-between items-center">
                 <span>項目名</span>
                 <span class="absolute left-1/3">学習時間</span>
             </div>
-            <div class="mb-4 border-b border-gray-400 flex items-center">
-              <span class="px-4 pb-4">Ruby</span>
-              <input type="number" class="mb-4 absolute left-1/3 w-28 border border-gray-400 rounded px-2 py-1" min="0" step="1">
-              <button class="mb-4 absolute right-1/3 px-4 py-1 border border-cyan-800 text-cyan-800 rounded hover:bg-gray-100 cursor-pointer mr-2">保存する</button>
-              <button class="mb-4 ml-auto mr-4 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
-            </div>
-            <div class="mb-4 border-b border-gray-400 flex items-center">
-              <span class="px-4 pb-4">Java</span>
-              <input type="number" class="mb-4 absolute left-1/3 w-28 border border-gray-400 rounded px-2 py-1" min="0" step="1">
-              <button class="mb-4 absolute right-1/3 px-4 py-1 border border-cyan-800 text-cyan-800 rounded hover:bg-gray-100 cursor-pointer mr-2">保存する</button>
-              <button class="mb-4 ml-auto mr-4 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
-            </div>
-            <div class="flex items-center">
-              <span class="px-4 pb-4">PHP</span>
-              <input type="number" class="mb-4 absolute left-1/3 w-28 border border-gray-400 rounded px-2 py-1" min="0" step="1">
-              <button class="mb-4 absolute right-1/3 px-4 py-1 border border-cyan-800 text-cyan-800 rounded hover:bg-gray-100 cursor-pointer mr-2">保存する</button>
-              <button class="mb-4 ml-auto mr-4 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
-            </div>
+            @if(isset($groupedLearningData[1]))
+                @foreach($groupedLearningData[1] as $data)
+                    <div class="mt-4 flex items-center border-b border-gray-400">
+                        <span class="px-4 pb-4">{{ $data->contents }}</span>
+                        <input type="number" class="mb-4 absolute left-1/3 w-28 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
+                        <button class="mb-4 absolute right-1/3 px-4 py-1 border border-cyan-800 text-cyan-800 rounded hover:bg-gray-100 cursor-pointer mr-2">保存する</button>
+                        <button class="mb-4 ml-auto mr-4 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
 
@@ -75,25 +64,23 @@
     <div class="mx-20 mt-10 w-200 border border-gray-400 p-6 rounded">
         <div class="flex items-center justify-between mb-6">
             <h2 class="font-bold mb-6 border-b border-gray-500 pb-2" style="width: 30%;">フロントエンド</h2>
-            <button class="mb-4 bg-cyan-800 text-white px-4 py-2 rounded hover:bg-cyan-900 cursor-pointer">項目を追加する</button>
+            <button onclick="location.href='{{ route('skills.create', ['category' => 2, 'month' => $selectedMonth]) }}'" class="mb-4 bg-cyan-800 text-white px-4 py-2 rounded hover:bg-cyan-900 cursor-pointer">項目を追加する</button>
         </div>
         <div class="border border-gray-400 rounded shadow">
-            <div class="mb-4 border-b border-gray-400 p-4 flex justify-between items-center">
+            <div class="border-b border-gray-400 p-4 flex justify-between items-center">
                 <span>項目名</span>
                 <span class="absolute left-1/3">学習時間</span>
             </div>
-            <div class="mb-4 border-b border-gray-400 flex items-center">
-              <span class="px-4 pb-4">HTML</span>
-              <input type="number" class="mb-4 absolute left-1/3 w-28 border border-gray-400 rounded px-2 py-1" min="0" step="1">
-              <button class="mb-4 absolute right-1/3 px-4 py-1 border border-cyan-800 text-cyan-800 rounded hover:bg-gray-100 cursor-pointer mr-2">保存する</button>
-              <button class="mb-4 ml-auto mr-4 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
-            </div>
-            <div class="flex items-center">
-              <span class="px-4 pb-4">CSS</span>
-              <input type="number" class="mb-4 absolute left-1/3 w-28 border border-gray-400 rounded px-2 py-1" min="0" step="1">
-              <button class="mb-4 absolute right-1/3 px-4 py-1 border border-cyan-800 text-cyan-800 rounded hover:bg-gray-100 cursor-pointer mr-2">保存する</button>
-              <button class="mb-4 ml-auto mr-4 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
-            </div>
+            @if(isset($groupedLearningData[2]))
+                @foreach($groupedLearningData[2] as $data)
+                    <div class="mt-4 flex items-center border-b border-gray-400">
+                        <span class="px-4 pb-4">{{ $data->contents }}</span>
+                        <input type="number" class="mb-4 absolute left-1/3 w-28 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
+                        <button class="mb-4 absolute right-1/3 px-4 py-1 border border-cyan-800 text-cyan-800 rounded hover:bg-gray-100 cursor-pointer mr-2">保存する</button>
+                        <button class="mb-4 ml-auto mr-4 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
 
@@ -101,33 +88,51 @@
     <div class="mx-20 mt-10 w-200 border border-gray-400 p-6 rounded">
         <div class="flex items-center justify-between mb-6">
             <h2 class="font-bold mb-6 border-b border-gray-500 pb-2" style="width: 30%;">インフラ</h2>
-            <button class="mb-4 bg-cyan-800 text-white px-4 py-2 rounded hover:bg-cyan-900 cursor-pointer">項目を追加する</button>
+            <button onclick="location.href='{{ route('skills.create', ['category' => 3, 'month' => $selectedMonth]) }}'" class="mb-4 bg-cyan-800 text-white px-4 py-2 rounded hover:bg-cyan-900 cursor-pointer">項目を追加する</button>
         </div>
         <div class="border border-gray-400 rounded shadow">
-            <div class="mb-4 border-b border-gray-400 p-4 flex justify-between items-center">
+            <div class="border-b border-gray-400 p-4 flex justify-between items-center">
                 <span>項目名</span>
                 <span class="absolute left-1/3">学習時間</span>
             </div>
-            <div class="mb-4 border-b border-gray-400 flex items-center">
-              <span class="px-4 pb-4">AWS</span>
-              <input type="number" class="mb-4 absolute left-1/3 w-28 border border-gray-400 rounded px-2 py-1" min="0" step="1">
-              <button class="mb-4 absolute right-1/3 px-4 py-1 border border-cyan-800 text-cyan-800 rounded hover:bg-gray-100 cursor-pointer mr-2">保存する</button>
-              <button class="mb-4 ml-auto mr-4 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
-            </div>
-            <div class="mb-4 border-b border-gray-400 flex items-center">
-              <span class="px-4 pb-4">GCP</span>
-              <input type="number" class="mb-4 absolute left-1/3 w-28 border border-gray-400 rounded px-2 py-1" min="0" step="1">
-              <button class="mb-4 absolute right-1/3 px-4 py-1 border border-cyan-800 text-cyan-800 rounded hover:bg-gray-100 cursor-pointer mr-2">保存する</button>
-              <button class="mb-4 ml-auto mr-4 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
-            </div>
-            <div class="flex items-center">
-              <span class="px-4 pb-4">Heroku</span>
-              <input type="number" class="mb-4 absolute left-1/3 w-28 border border-gray-400 rounded px-2 py-1" min="0" step="1">
-              <button class="mb-4 absolute right-1/3 px-4 py-1 border border-cyan-800 text-cyan-800 rounded hover:bg-gray-100 cursor-pointer mr-2">保存する</button>
-              <button class="mb-4 ml-auto mr-4 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
+            @if(isset($groupedLearningData[3]))
+                @foreach($groupedLearningData[3] as $data)
+                    <div class="mt-4 flex items-center border-b border-gray-400">
+                        <span class="px-4 pb-4">{{ $data->contents }}</span>
+                        <input type="number" class="mb-4 absolute left-1/3 w-28 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
+                        <button class="mb-4 absolute right-1/3 px-4 py-1 border border-cyan-800 text-cyan-800 rounded hover:bg-gray-100 cursor-pointer mr-2">保存する</button>
+                        <button class="mb-4 ml-auto mr-4 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+    </div>
+
+@if(session('successMessage'))
+    <!-- モーダルの背景 -->
+    <div id="modalBackground" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" onclick="closeModal()"></div>
+
+    <!-- モーダルコンテンツ -->
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3 text-center">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                {{ session('successMessage') }}
+            </h3>
+            <div class="items-center px-4 py-3">
+                <button id="okBtn" onclick="window.location='{{ route('skills.index') }}'" class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-300">
+                    編集ページに戻る
+                </button>
             </div>
         </div>
     </div>
+@endif
+    <script>
+    if (document.getElementById("successModal")) {
+      // モーダル表示のためのコード
+      var modal = document.getElementById("successModal");
+      modal.style.display = "block";
+      }
+    </script>
 
     <!-- footer -->
     <div class="w-full h-10 px-10 mt-12 bg-cyan-800 flex justify-center items-center">

@@ -29,3 +29,7 @@ Route::post('/login',[\App\Http\Controllers\UserController::class,'login']);
 // ログインしていない状態で/topにアクセスするとログイン画面に飛ぶ
 Route::get('/login',[\App\Http\Controllers\UserController::class,'showLogin'])->name('login');
 
+// カテゴリー別に対応した項目追加ページに遷移する
+Route::get('/skills/create/{category}', [SkillController::class, 'create'])->name('skills.create');
+
+Route::post('/skills', [SkillController::class, 'store'])->name('skills.store');
