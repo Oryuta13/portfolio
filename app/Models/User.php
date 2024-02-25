@@ -55,6 +55,11 @@ class User extends Authenticatable
             // ログインしている場合、ユーザーのアバター画像のパスを返す
             return asset(Auth::user()->avatar);
         }
+    }
 
+    // UserモデルとLearningDataモデルのリレーションを定義
+    public function learningData()
+    {
+        return $this->hasMany(LearningData::class, 'user_id');
     }
 }
