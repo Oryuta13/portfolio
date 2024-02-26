@@ -134,4 +134,16 @@ class SkillController extends Controller
         $successMessage = "{$learningData->contents}の学習時間を保存しました！";
         return back()->with('successMessage', $successMessage);
     }
+
+    public function destroy($id)
+    {
+        $learningData = LearningData::findOrFail($id);
+        // 削除する項目名を保存
+        $deletedItemName = $learningData->contents;
+        $learningData->delete();
+
+        // 削除確認モーダルに表示するメッセージをフラッシュ
+        return back()->with('successMessage', "{$deletedItemName}を削除しました！");
+    }
+
 }
