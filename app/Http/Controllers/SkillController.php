@@ -117,4 +117,21 @@ class SkillController extends Controller
         return redirect()->route('skills.create', ['category' => $request->category_id])
             ->with('successMessage', "{$categoryName}に{$request->contents}を{$request->study_time}分で追加しました！");
     }
+
+    public function update(Request $request, $id)
+    {
+        // バリデーション
+        $request->validate([
+            'study_time' => 'required|numeric|min:0',
+        ]);
+
+        // 学習データを更新
+        $learningData = LearningData::findOrFail($id);
+        $learningData->study_time = $request->study_time;
+        $learningData->save();
+
+        // 成功メッセージ
+        $successMessage = "{$learningData->contents}の学習時間を保存しました！";
+        return back()->with('successMessage', $successMessage);
+    }
 }

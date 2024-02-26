@@ -51,9 +51,13 @@
                 @foreach($groupedLearningData[1] as $data)
                     <div class="mt-4 flex items-center border-b border-gray-400">
                         <span class="px-4 pb-4">{{ $data->contents }}</span>
-                        <input type="number" class="mb-4 absolute left-1/3 w-28 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
-                        <button class="mb-4 absolute right-1/3 px-4 py-1 border border-cyan-800 text-cyan-800 rounded hover:bg-gray-100 cursor-pointer mr-2">保存する</button>
-                        <button class="mb-4 ml-auto mr-4 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
+                        <form action="{{ route('skills.update', $data->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <input type="number" name="study_time" class="mb-4 absolute left-1/3 w-28 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
+                            <button class="mb-4 absolute right-1/3 px-4 py-1 border border-cyan-800 text-cyan-800 rounded hover:bg-gray-100 cursor-pointer mr-2">保存する</button>
+                            <button class="mb-4 ml-auto mr-4 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
+                        </form>
                     </div>
                 @endforeach
             @endif
@@ -108,24 +112,23 @@
         </div>
     </div>
 
-@if(session('successMessage'))
-    <!-- モーダルの背景 -->
-    <div id="modalBackground" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" onclick="closeModal()"></div>
-
-    <!-- モーダルコンテンツ -->
-    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-        <div class="mt-3 text-center">
-            <h3 class="text-lg leading-6 font-medium text-gray-900">
-                {{ session('successMessage') }}
-            </h3>
-            <div class="items-center px-4 py-3">
-                <button id="okBtn" onclick="window.location='{{ route('skills.index') }}'" class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-300">
-                    編集ページに戻る
-                </button>
+    @if(session('successMessage'))
+        <!-- モーダルの背景 -->
+        <div id="modalBackground" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" onclick="closeModal()"></div>
+        <!-- モーダルコンテンツ -->
+        <div class="bg-white rounded-lg shadow p-5 w-full max-w-md mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div class="text-center">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    {{ session('successMessage') }}
+                </h3>
+                <div class="mt-8 mb-4">
+                    <button id="okBtn" onclick="window.location='{{ route('skills.index') }}'" class="px-8 py-2 bg-cyan-800 hover:bg-cyan-900 text-white text-base font-medium rounded-md shadow-sm focus:outline-none">
+                        編集ページに戻る
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-@endif
+    @endif
     <script>
     if (document.getElementById("successModal")) {
       // モーダル表示のためのコード
