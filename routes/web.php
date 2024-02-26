@@ -34,3 +34,5 @@ Route::get('/skills/create/{category}', [SkillController::class, 'create'])->nam
 
 Route::post('/skills', [SkillController::class, 'store'])->name('skills.store');
 Route::put('/skills/{id}', [SkillController::class, 'update'])->name('skills.update');
+
+Route::delete('/skills/{id}', [SkillController::class, 'destroy'])->name('skills.destroy');
