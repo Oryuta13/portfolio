@@ -142,7 +142,7 @@
                     {{ session('successMessage') }}
                 </h3>
                 <div class="mt-8 mb-4">
-                    <button id="okBtn" onclick="window.location='{{ route('skills.index') }}'" class="px-8 py-2 bg-cyan-800 hover:bg-cyan-900 text-white text-base font-medium rounded-md shadow-sm focus:outline-none">
+                    <button id="okBtn" onclick="window.location='{{ route('skills.index', ['month' => session('redirectMonth', $currentMonth)]) }}'" class="px-8 py-2 bg-cyan-800 hover:bg-cyan-900 text-white text-base font-medium rounded-md shadow-sm focus:outline-none">
                         編集ページに戻る
                     </button>
                 </div>

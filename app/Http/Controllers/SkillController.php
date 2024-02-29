@@ -132,6 +132,11 @@ class SkillController extends Controller
 
         // 成功メッセージ
         $successMessage = "{$learningData->contents}の学習時間を保存しました！";
+
+        // 学習データの月情報をセッションに保存
+        $studyDate = Carbon::parse($learningData->study_date);
+        session(['redirectMonth' => $studyDate->format('n月')]);
+
         return back()->with('successMessage', $successMessage);
     }
 
@@ -141,6 +146,10 @@ class SkillController extends Controller
         // 削除する項目名を保存
         $deletedItemName = $learningData->contents;
         $learningData->delete();
+
+        // 学習データの月情報をセッションに保存
+        $studyDate = Carbon::parse($learningData->study_date);
+        session(['redirectMonth' => $studyDate->format('n月')]);
 
         // 削除確認モーダルに表示するメッセージをフラッシュ
         return back()->with('successMessage', "{$deletedItemName}を削除しました！");

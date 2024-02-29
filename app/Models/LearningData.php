@@ -9,6 +9,8 @@ class LearningData extends Model
 {
     use HasFactory;
 
+    protected $dates = ['study_date'];
+
     // UserモデルとCategoryモデルの関係を示すためのメソッドを定義
     public function user()
     {
