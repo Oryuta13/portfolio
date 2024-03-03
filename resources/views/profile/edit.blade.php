@@ -21,7 +21,7 @@
     <div class="mt-20 text-center text-black text-opacity-75 text-4xl font-normal font-['Roboto'] leading-[48px]">自己紹介を編集する</div>
 
     <!-- フォーム -->
-    <div class="mt-20 ml-80 mr-80 flex-col justify-start items-center gap-12 inline-flex">
+    <div class="flex flex-col items-center justify-center mx-auto mt-20 gap-12 max-2-screen-lg">
         <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
             @csrf
             <!-- 自己紹介文 -->
