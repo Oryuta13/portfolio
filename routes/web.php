@@ -14,7 +14,7 @@ Route::get('/register',[\App\Http\Controllers\UserController::class,'showRegiste
 
 Route::post('/register',[\App\Http\Controllers\UserController::class,'register']);
 
-// ログインしているuserのみ
+// ログインしているuser
 Route::middleware('auth')->group(function (){
     // Route::get('/top',[\App\Http\Controllers\UserController::class,'top'])->name('top');
     Route::post('logout',[\App\Http\Controllers\UserController::class,'logout'])->name('user.logout');
