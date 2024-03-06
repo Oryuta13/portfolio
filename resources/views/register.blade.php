@@ -44,6 +44,7 @@
             <button type="submit" class="py-2 px-20 rounded-md bg-cyan-800 hover:bg-cyan-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-900 text-white">登録する</button>
         </div>
     </form>
+
     <!-- フッター -->
     <div class="w-full h-10 px-10 mt-10 bg-cyan-800 flex justify-center items-center">
         <div class="text-white text-lg font-normal font-['Roboto']">portfolio site</div>
