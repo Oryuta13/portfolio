@@ -44,7 +44,7 @@
         </div>
     </form>
     <!-- フッター -->
-    <div class="w-full h-10 px-10 mt-16 bg-cyan-800 flex justify-center items-center">
+    <div class="w-full h-10 px-10 mt-20 bg-cyan-800 flex justify-center items-center">
         <div class="text-white text-lg font-normal font-['Roboto']">portfolio site</div>
     </div>
 </body>
