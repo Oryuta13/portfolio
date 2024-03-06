@@ -7,6 +7,8 @@ use App\Modules\ImageUpload\ImageManagerInterface;
 use App\Modules\ImageUpload\LocalImageManager;
 use Cloudinary\Cloudinary;
 use Illuminate\Support\ServiceProvider;
+use ILLuminate\Support\Facades\App;
+use ILLuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
