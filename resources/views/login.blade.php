@@ -38,6 +38,7 @@
         </div>
     </form>
     <form action="/register" method="get" class="mt-12">
+        @csrf
         <div class="flex justify-center items-center">
             <button type="submit" class="py-2 px-20 rounded-md bg-cyan-800 hover:bg-cyan-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-900 text-white">新規登録する</button>
         </div>
