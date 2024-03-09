@@ -12,8 +12,8 @@ class SkillController extends Controller
 {
     public function index(Request $request)
     {
-        // リクエストから月のデータを取得、デフォルトは現在の月
-        $selectedMonth = $request->input('month', Carbon::now()->format('n月'));
+        // リクエストから月のデータを取得、デフォルトは現在の月。URLデコードを適用
+        $selectedMonth = urldecode($request->input('month', Carbon::now()->format('n月')));
 
         // 直近3ヶ月の日付を$monthsに格納
         $months = collect([
@@ -47,6 +47,9 @@ class SkillController extends Controller
 
     public function create($category, Request $request)
     {
+        // URLデコードを適用
+        $selectedMonth = urldecode($request->input('month', now()->format('n月')));
+
         $categoryName = Category::where('id', $category)->firstOrFail()->category;
         $selectedMonth = $request->month;
 
