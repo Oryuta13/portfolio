@@ -6,24 +6,32 @@ RUN cd /app && npm ci && npm run prod
 
 FROM php:8.1.5-apache
 
+# 必要なパッケージのインストールと設定
 RUN apt-get update && apt-get install -y \
   zip \
   unzip \
   git \
   libmemcached-dev \
-  zlib1g-dev
+  zlib1g-dev \
+  && pecl install memcached \
+  && docker-php-ext-enable memcached \
+  && docker-php-ext-install -j "$(nproc)" opcache \
+  && docker-php-ext-enable opcache
 
-RUN pecl install memcached \
-  && docker-php-ext-enable memcached
+# mod_rewrite を有効にする
+RUN a2enmod rewrite
 
-RUN docker-php-ext-install -j "$(nproc)" opcache && docker-php-ext-enable opcache
+# Apacheのポートとドキュメントルートの設定を変更
+RUN sed -i 's/80/8080/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf \
+  && sed -i 's#/var/www/html#/var/www/html/public#g' /etc/apache2/sites-available/000-default.conf
 
-RUN sed -i 's/80/8080/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
-RUN sed -i 's#/var/www/html#/var/www/html/public#g' /etc/apache2/sites-available/000-default.conf
+# PHPの設定ファイルを本番用に変更
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
+# Composerを最新バージョンでコピー
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# アプリケーションのセットアップ
 WORKDIR /var/www/html
 COPY . ./
 COPY --from=node-builder /app/public ./public
