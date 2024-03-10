@@ -9,7 +9,12 @@ FROM php:8.1.5-apache
 RUN apt-get update && apt-get install -y \
   zip \
   unzip \
-  git
+  git \
+  libmemcached-dev \
+  zlib1g-dev
+
+RUN pecl install memcached \
+  && docker-php-ext-enable memcached
 
 RUN docker-php-ext-install -j "$(nproc)" opcache && docker-php-ext-enable opcache
 
