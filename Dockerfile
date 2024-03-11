@@ -34,9 +34,16 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 # Composerを最新バージョンでコピー
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# エントリポイントスクリプトをコピー
+COPY entrypoint.sh /entrypoint.sh
+# スクリプトを実行可能にする
+RUN chmod +x /entrypoint.sh
+
 # アプリケーションのセットアップ
 WORKDIR /var/www/html
 COPY . ./
 COPY --from=node-builder /app/public ./public
 RUN composer install
 RUN chown -Rf www-data:www-data ./
+
+ENTRYPOINT ["/entrypoint.sh"]
