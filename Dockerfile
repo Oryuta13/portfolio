@@ -11,11 +11,14 @@ RUN apt-get update && apt-get install -y \
   zip \
   unzip \
   git \
+  postgresql-client \
+  libpq-dev \
   libmemcached-dev \
   zlib1g-dev \
   && pecl install memcached \
   && docker-php-ext-enable memcached \
   && docker-php-ext-install -j "$(nproc)" opcache \
+  && docker-php-ext-install -j "$(nproc)" pdo_pgsql pgsql \
   && docker-php-ext-enable opcache
 
 # mod_rewrite を有効にする
