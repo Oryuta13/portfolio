@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # マイグレーションの実行
 php artisan migrate --force
 
