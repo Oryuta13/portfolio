@@ -40,7 +40,7 @@
     <div class="mx-20 mt-10 w-200 border border-gray-400 p-6 rounded">
         <div class="flex items-center justify-between mb-6">
             <h2 class="font-bold mb-6 border-b border-gray-500 pb-2" style="width: 30%;">バックエンド</h2>
-            <button onclick="location.href='{{ route('skills.create', ['category' => 1, 'month' => $selectedMonth]) }}'" class="mb-4 bg-cyan-800 text-white px-4 py-2 rounded hover:bg-cyan-900 cursor-pointer">項目を追加する</button>
+            <a href="{{ route('skills.create', ['category' => 1, 'month' => $selectedMonth]) }}" class="mb-4 bg-cyan-800 text-white px-4 py-2 rounded hover:bg-cyan-900 cursor-pointer">項目を追加する</a>
         </div>
         <div class="border border-gray-400 rounded shadow">
             <div class="border-b border-gray-400 p-4 flex justify-between items-center">

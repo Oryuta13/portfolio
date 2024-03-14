@@ -47,23 +47,16 @@ class SkillController extends Controller
 
     public function create($category, Request $request)
     {
-        // URLデコードを適用
-        $selectedMonth = urldecode($request->input('month', now()->format('n月')));
+        // 月のデータを取得（デフォルトは現在の月）
+        $selectedMonth = $request->input('month', now()->format('n月'));
 
         $categoryName = Category::where('id', $category)->firstOrFail()->category;
-        $selectedMonth = $request->month;
-
-        // もしドロップダウンから月を選択していなければ、現在の月を使用
-        if (!$selectedMonth) {
-            $selectedMonth = now()->format('n月');
-        }
 
         // categoriesテーブルからカテゴリーを取得
         $categories = Category::all();
 
         // 現在の月または選択された月を取得
         $currentMonth = now()->format('n月');
-        $selectedMonth = request('month') ?? $currentMonth;
 
         // 変数をビューに渡す
         return view('skills.create', compact('categories', 'selectedMonth', 'categoryName', 'category'));

@@ -79,14 +79,9 @@
       }
     </script>
 
-
     <!-- footer -->
     <div class="w-full h-10 px-10 mt-40 bg-cyan-800 flex justify-center items-center">
         <div class="text-white text-lg font-normal font-['Roboto']">portfolio site</div>
     </div>
-
-
-
-
     </body>
 </html>
