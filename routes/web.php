@@ -39,3 +39,6 @@ Route::post('/skills', [SkillController::class, 'store'])->name('skills.store');
 Route::put('/skills/{id}', [SkillController::class, 'update'])->name('skills.update');
 
 Route::delete('/skills/{id}', [SkillController::class, 'destroy'])->name('skills.destroy');
+
+Route::view('upload', 'upload');
+Route::post('s3', [\App\Http\Controllers\S3Controller::class, 'uploadS3'])->name('s3');
