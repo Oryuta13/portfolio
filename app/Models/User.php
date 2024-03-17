@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -55,6 +56,19 @@ class User extends Authenticatable
             // ログインしている場合、ユーザーのアバター画像のパスを返す
             return asset(Auth::user()->avatar);
         }
+    }
+
+    public function getAvatarAttribute($value)
+    {
+        if (!$value){
+            // デフォルトのアバター画像のパスを返す
+            return asset('storage/avatars/gray-icon.png');
+        } elseif (!Str::startsWith($value, ['http://', 'https://', '/storage'])) {
+            // アップロードされた画像のパスを返す
+            return asset('storage/avatars/' . $value);
+        }
+        // それ以外の場合（完全なURLまたは正しいストレージパスがすでに含まれている場合)、その値をそのまま返す
+        return $value;
     }
 
     // UserモデルとLearningDataモデルのリレーションを定義
