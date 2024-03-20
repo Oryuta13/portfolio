@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProfileController extends Controller
@@ -41,15 +42,20 @@ class ProfileController extends Controller
         if($request->hasFile('avatar')) {
             // フォームから送信されたavatarファイルを取得
             $avatar = $request->file('avatar');
+            // ユニークなファイル名を生成
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            // S3へ保存
+            $path = $avatar->storeAs('avatars', $filename, 's3');
+            // 完全なURLをユーザーのavatarフィールドへ保存
+            $user->avatar = Storage::disk('s3')->url($path);
+            $user->save();
+            // 編集後はtopページに飛ばす
+            return redirect('top');
             // avatarファイルを指定のディレクトリにそのままのファイル名で保存
-            $avatar->storeAs('public/avatars', $avatar->getClientOriginalName());
+            // $avatar->storeAs('public/avatars', $avatar->getClientOriginalName());
             // userのプロフィールにそのままのファイル名を使用したavatarのファイル名を設定
-            $user->avatar = $avatar->getClientOriginalName();
+            // $user->avatar = $avatar->getClientOriginalName();
+        // }
         }
-        // ここまでのuser情報を保存
-        $user->save();
-        // 編集後はtopページに飛ばす
-        return redirect('top');
-
     }
 }

@@ -63,11 +63,11 @@ class User extends Authenticatable
         if (!$value){
             // デフォルトのアバター画像のパスを返す
             return asset('storage/avatars/gray-icon.png');
-        } elseif (!Str::startsWith($value, ['http://', 'https://', '/storage'])) {
+        // } elseif (!Str::startsWith($value, ['http://', 'https://', '/storage'])) {
             // アップロードされた画像のパスを返す
-            return asset('storage/avatars/' . $value);
+            // return asset('storage/avatars/' . $value);
         }
-        // それ以外の場合（完全なURLまたは正しいストレージパスがすでに含まれている場合)、その値をそのまま返す
+        // S3からの完全なURL
         return $value;
     }
 
