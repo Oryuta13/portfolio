@@ -61,13 +61,10 @@ class User extends Authenticatable
     public function getAvatarAttribute($value)
     {
         if (!$value){
-            // デフォルトのアバター画像のパスを返す
-            return asset('storage/avatars/gray-icon.png');
-        // } elseif (!Str::startsWith($value, ['http://', 'https://', '/storage'])) {
-            // アップロードされた画像のパスを返す
-            // return asset('storage/avatars/' . $value);
+            // デフォルトのアバター画像のS3URLを返す
+            return 'https://ryuta13-portfolio.s3.ap-northeast-1.amazonaws.com/avatars/gray-icon.png';
         }
-        // S3からの完全なURL
+        // すでに完全なS3のURLを持っている場合はそのまま返す
         return $value;
     }
 
