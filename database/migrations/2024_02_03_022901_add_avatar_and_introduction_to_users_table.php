@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // 新しいカラムを追加する
-            // $table->string('avatar')->nullable()->default('storage/avatars/gray-icon.png');
-            $table->string('avatar')->nullable()->default('/storage/avatars/gray-icon.png');
+            // 新規登録時のavatarの初期値はs3のgray-icon.pngをUserモデルで指定している為、コメントアウト
+            // $table->string('avatar')->nullable()->default('/storage/avatars/gray-icon.png');
             $table->string('introduction')->nullable()->default('自己紹介文を入力する自己紹介文を入力する自己紹介文を入力する自己紹介文を入力する自己紹介文を入力する自己紹介文を入力する');
         });
     }

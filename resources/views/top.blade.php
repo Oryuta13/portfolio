@@ -25,7 +25,6 @@
         <div class="relative">
             <div class="w-[320px] bg-gray-300 h-[320px] rounded-full overflow-hidden flex items-center justify-center">
                 @if(Auth::check())
-                    <!-- <img src="{{ asset('storage/avatars/' . Auth::user()->avatar) }}" alt="User Avatar" class="object-cover w-full h-full rounded-full"> -->
                     <img src="{{ Auth::user()->avatar }}" alt="User Avatar" class="object-cover w-full h-full rounded-full">
                 @endif
             </div>
