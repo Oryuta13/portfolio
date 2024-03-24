@@ -81,8 +81,9 @@
             <script>
                 // ファイル選択時にファイル名を表示する関数
                 function updateFileName(input) {
-                    const fileNameContainer = input.closest('.mt-4').querySelector('.file-name-container').querySelector('span');
-                    const fileNamePlaceholder = document.getElementById('fileNamePlaceholder');
+                    const fileNameContainer = document.querySelector('.file-name-container span');
+                    // const fileNameContainer = input.closest('.mt-4').querySelector('.file-name-container').querySelector('span');
+                    // const fileNamePlaceholder = document.getElementById('fileNamePlaceholder');
 
                     if (input.files.length > 0) {
                         fileNameContainer.textContent = input.files[0].name;
