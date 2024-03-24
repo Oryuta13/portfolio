@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,12 +8,16 @@
     @vite('resources/css/app.css')
     <title>新規登録</title>
 </head>
-<body>
+<body class="flex flex-col h-full">
     <!-- ヘッダー -->
     <div class="w-full h-[120px] px-10 bg-custom-blue flex justify-between items-center">
         <div class="text-white text-3xl font-bold font-['Roboto']">My Portfolio</div>
         <a href="{{ route('login') }}" class="px-10 py-4 bg-white rounded flex justify-center items-center text-black text-lg font-normal font-['Roboto'] hover:bg-gray-200">ログイン</a>
     </div>
+
+    <!-- メインコンテンツ -->
+    <div class="flex-grow">
+
     <div class="mt-20 text-center text-black text-3xl font-normal font-['Roboto']">新規登録</div>
     <!-- フォーム -->
     <form action="" method="post" class="mx-auto max-w-screen-lg space-y-6 mt-12" novalidate>
@@ -44,7 +48,7 @@
             <button type="submit" class="mt-4 py-4 px-20 rounded-md bg-custom-blue hover:bg-cyan-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-900 text-white">登録する</button>
         </div>
     </form>
-
+    </div>
     <!-- フッター -->
     <div class="w-full h-[40px] mt-40 px-10 bg-custom-blue flex justify-center items-center">
         <div class="text-white text-lg font-normal font-['Roboto']">portfolio site</div>
