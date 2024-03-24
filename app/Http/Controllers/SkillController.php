@@ -86,6 +86,9 @@ class SkillController extends Controller
         // 学習日を月初めに設定
         $studyDate = Carbon::createFromFormat('n月', $request->study_date)->startOfMonth();
 
+        // 学習データの月情報をセッションに保存
+        session(['redirectMonth' => $studyDate->format('n月')]);
+
         // 同じユーザー、同じ月、同じ項目名でデータが存在するかチェック
         $existingData = LearningData::where('user_id', auth()->id())
                                     ->where('study_date', $studyDate)
