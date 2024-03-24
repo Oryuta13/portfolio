@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,11 +8,14 @@
     @vite('resources/css/app.css')
     <title>ログイン</title>
 </head>
-<body>
+<body class="flex flex-col h-full">
     <!-- ヘッダー -->
     <div class="w-full h-[120px] flex justify-center py-10 bg-custom-blue">
         <div class="text-white text-3xl font-bold font-['Roboto']">My Portfolio</div>
     </div>
+
+    <!-- メインコンテンツ -->
+    <div class="flex-grow">
     <!-- エラーメッセージ -->
     @if (session('loginError'))
         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative text-center">
@@ -43,6 +46,7 @@
             <button type="submit" class="py-4 px-20 rounded-md bg-custom-blue hover:bg-cyan-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-900 text-white">新規登録する</button>
         </div>
     </form>
+    </div>
     <!-- フッター -->
     <div class="w-full h-[40px] mt-40 px-10 bg-custom-blue flex justify-center items-center">
         <div class="text-white text-lg font-normal font-['Roboto']">portfolio site</div>
