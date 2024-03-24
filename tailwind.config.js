@@ -9,6 +9,7 @@ export default {
         extend: {
             colors: {
                 "custom-blue": "rgba(27, 86, 120, 1)",
+                "custom-red": "rgba(238, 105, 105, 1)",
             },
         },
     },
