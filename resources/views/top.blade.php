@@ -11,11 +11,11 @@
 </head>
 <body>
     <!-- ヘッダー -->
-    <div class="w-full h-20 px-10 bg-cyan-800 flex justify-between items-center">
-        <div class="text-white text-2xl md:text-4xl font-bold font-['Roboto']">My Portfolio</div>
+    <div class="w-full h-[120px] px-10 bg-custom-blue flex justify-between items-center">
+        <div class="text-white text-3xl font-bold font-['Roboto']">My Portfolio</div>
         <form action="{{ route('user.logout') }}" method="POST">
             @csrf
-            <button type="submit" class="px-4 py-2 bg-white rounded flex justify-center items-center text-black text-opacity-75 text-sm md:text-lg font-normal font-['Roboto'] hover:bg-gray-200">ログアウト</button>
+            <button type="submit" class="px-10 py-4 bg-white rounded flex justify-center items-center text-black text-lg font-normal font-['Roboto'] hover:bg-gray-200">ログアウト</button>
         </form>
     </div>
 
@@ -29,15 +29,15 @@
                 @endif
             </div>
             <!-- ユーザー名 -->
-            <div class="mt-5 ml-28 text-black text-opacity-75 font-bold font-['Roboto']">
+            <div class="mt-5 text-center text-black font-normal font-['Roboto']">
                 {{ \Illuminate\Support\Facades\Auth::user()->name }}
             </div>
         </div>
         <!-- 自己紹介 -->
         <div class="ml-20 flex flex-col items-start">
-            <div class="text-black text-opacity-75 text-4xl font-bold font-['Roboto']">自己紹介</div>
-            <div class="mt-2 w-80 h-1 bg-black"></div>
-            <div class="mt-5 text-black text-opacity-75 font-normal font-['Roboto'] min-h-[10rem]">
+            <div class="text-black text-3xl font-bold font-['Roboto']">自己紹介</div>
+            <div class="mt-2 w-48 border-b-2 border-gray-700"></div>
+            <div class="mt-5 text-black font-normal font-['Roboto'] min-h-[10rem] max-w-[960px]" style="word-break: break-all; overflow-wrap: anywhere;">
                 @if(Auth::check())
                     {{ Auth::user()->introduction }}
                 @else
@@ -45,7 +45,7 @@
                 @endif
             </div>
             <div class="mt-4">
-                <a href="{{ route('profile.edit') }}" class="w-[180px] h-[40px] px-6 py-3 bg-cyan-800 rounded text-white text-sm font-normal font-['Roboto'] hover:bg-cyan-900">
+                <a href="{{ route('profile.edit') }}" class="px-10 py-4 bg-custom-blue rounded text-white text-lg font-normal font-['Roboto'] hover:bg-cyan-900">
                     自己紹介を編集する
                 </a>
             </div>
@@ -54,25 +54,23 @@
 
     <!-- 学習チャート -->
     <div class="mt-20 flex flex-col items-center justify-center mx-60">
-        <div class="text-black text-opacity-75 text-4xl font-bold font-['Roboto']">学習チャート</div>
-        <div class="mt-2 w-80 h-1 bg-black"></div>
+        <div class="text-black text-3xl font-bold font-['Roboto']">学習チャート</div>
+        <div class="mt-4 w-96 border-b-2 border-gray-700"></div>
         <div class="mt-10">
             <!-- 編集ボタン -->
-            <a href="{{ route('skills.index') }}" class="mt-20 w-[180px] h-[40px] px-6 py-3 bg-cyan-800 rounded text-white text-sm font-normal font-['Roboto'] hover:bg-cyan-900">
+            <a href="{{ route('skills.index') }}" class="px-10 py-4 bg-custom-blue rounded text-white text-lg font-normal font-['Roboto'] hover:bg-cyan-900">
                 編集する
             </a>
-    </div>
+        </div>
     </div>
 
     <!-- チャート -->
-    <div class="flex justify-center mt-10">
+    <div class="flex justify-center mt-20">
         <canvas id="skillChart"></canvas>
     </div>
 
-
-
     <!-- footer -->
-    <div class="w-full h-10 px-10 mt-10 bg-cyan-800 flex justify-center items-center">
+    <div class="w-full h-[40px] px-10 mt-20 bg-custom-blue flex justify-center items-center">
         <div class="text-white text-lg font-normal font-['Roboto']">portfolio site</div>
     </div>
 
@@ -122,9 +120,9 @@
         function getColor(index) {
             // カテゴリーごとに色を指定
             const colors = [
-                'rgba(255, 105, 180, 0.8)',
-                'rgba(255, 165, 0, 0.8)',
-                'rgba(189, 183, 107, 0.8)',
+                'rgba(255, 182, 193, 1.0)',
+                'rgba(255, 218, 185, 1.0)',
+                'rgba(255, 239, 213, 1.0)',
             ];
             return colors[index % colors.length];
         }
