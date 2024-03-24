@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
     <title>自己紹介編集</title>
 </head>
-<body>
+<body class="flex flex-col h-full">
     <!-- ヘッダー -->
     <div class="w-full h-[120px] px-10 bg-custom-blue flex justify-between items-center">
         <div class="text-white text-3xl font-bold font-['Roboto']">My Portfolio</div>
@@ -17,6 +17,9 @@
             <button type="submit" class="px-10 py-4 bg-white rounded flex justify-center items-center text-black text-lg font-normal font-['Roboto'] hover:bg-gray-200">ログアウト</button>
         </form>
     </div>
+
+    <!-- メインコンテンツ -->
+    <div class="flex-grow">
 
     <div class="mt-20 text-center text-black text-3xl font-normal font-['Roboto']">自己紹介を編集する</div>
 
@@ -94,6 +97,7 @@
                 <button type="submit" class="px-20 py-4 text-white text-lg font-normal font-['Roboto']">自己紹介を確定する</button>
             </div>
         </form>
+    </div>
     </div>
     <!-- footer -->
     <div class="w-full h-[40px] px-10 mt-20 bg-custom-blue flex justify-center items-center">
