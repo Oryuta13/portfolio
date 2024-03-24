@@ -48,14 +48,11 @@ class ProfileController extends Controller
             $path = $avatar->storeAs('avatars', $filename, 's3');
             // 完全なURLをユーザーのavatarフィールドへ保存
             $user->avatar = Storage::disk('s3')->url($path);
-            $user->save();
-            // 編集後はtopページに飛ばす
-            return redirect('top');
-            // avatarファイルを指定のディレクトリにそのままのファイル名で保存
-            // $avatar->storeAs('public/avatars', $avatar->getClientOriginalName());
-            // userのプロフィールにそのままのファイル名を使用したavatarのファイル名を設定
-            // $user->avatar = $avatar->getClientOriginalName();
-        // }
         }
+
+        // ユーザー情報を保存（アバター画像の有無にかかわらず）
+        $user->save();
+        // 編集後はtopページに飛ばす
+        return redirect('top');
     }
 }
