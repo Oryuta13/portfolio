@@ -26,14 +26,16 @@
     </button>
 
     <!-- ドロップダウンメニュー -->
-    <div id="dropdown" class="z-10 hidden mx-20 bg-gray-100 divide-y divide-gray-200 shadow" style="width: fit-content;">
-        <ul class="py-2 text-sm text-black" aria-labelledby="dropdownDefaultButton">
-          @foreach ($months as $month)
-          <li>
-            <a href="{{ route('skills.index', ['month' => $month]) }}" class="block px-2.5 py-2 hover:bg-gray-200">{{ $month }}</a>
-          </li>
-          @endforeach
-        </ul>
+    <div style="position: relative;">
+        <div id="dropdown" class="z-10 hidden mx-20 bg-gray-100 divide-y divide-gray-200 shadow" style="position: absolute; width: fit-content;">
+            <ul class="py-2 text-sm text-black" aria-labelledby="dropdownDefaultButton">
+            @foreach ($months as $month)
+            <li>
+                <a href="{{ route('skills.index', ['month' => $month]) }}" class="block px-2.5 py-2 hover:bg-gray-200">{{ $month }}</a>
+            </li>
+            @endforeach
+            </ul>
+        </div>
     </div>
 
     <!-- バックエンド -->
