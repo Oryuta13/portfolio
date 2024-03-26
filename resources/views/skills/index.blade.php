@@ -19,19 +19,19 @@
     </div>
 
     <!-- ドロップダウンボタン -->
-    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-black bg-gray-100 hover:bg-gray-200 font-bold text-sm px-2.5 py-2 text-center inline-flex items-center shadow mx-20 mt-10" type="button">
-      {{ $selectedMonth ? $selectedMonth : $currentMonth }} <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-black bg-white hover:bg-gray-100 font-bold text-sm px-4 py-2 text-center inline-flex items-center shadow rounded mx-60 mt-10" type="button">
+      {{ $selectedMonth ? $selectedMonth : $currentMonth }} <svg class="w-2 h-2 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
     </svg>
     </button>
 
     <!-- ドロップダウンメニュー -->
     <div style="position: relative;">
-        <div id="dropdown" class="z-10 hidden mx-20 bg-gray-100 divide-y divide-gray-200 shadow" style="position: absolute; width: fit-content;">
+        <div id="dropdown" class="z-10 hidden mx-60 bg-white divide-y divide-gray-200 shadow-md rounded" style="position: absolute; width: fit-content;">
             <ul class="py-2 text-sm text-black" aria-labelledby="dropdownDefaultButton">
             @foreach ($months as $month)
             <li>
-                <a href="{{ route('skills.index', ['month' => $month]) }}" class="block px-2.5 py-2 hover:bg-gray-200">{{ $month }}</a>
+                <a href="{{ route('skills.index', ['month' => $month]) }}" class="block pl-4 pr-8 py-2 hover:bg-gray-100">{{ $month }}</a>
             </li>
             @endforeach
             </ul>
@@ -39,25 +39,25 @@
     </div>
 
     <!-- バックエンド -->
-    <div class="mx-20 mt-10 w-200 border border-gray-400 p-6 rounded">
+    <div class="mx-60  mt-10 w-200 border border-gray-400 p-6 rounded">
         <div class="flex items-center justify-between mb-6">
-            <h2 class="font-bold mb-6 border-b border-gray-500 pb-2" style="width: 30%;">バックエンド</h2>
+            <h2 class="font-bold mb-6 border-b-2 border-gray-500 pb-2" style="width: 240px;">バックエンド</h2>
             <a href="{{ route('skills.create', ['category' => 1, 'month' => $selectedMonth]) }}" class="mb-4 bg-custom-blue text-white px-10 py-4 rounded hover:bg-cyan-900 cursor-pointer">項目を追加する</a>
         </div>
-        <div class="border border-gray-400 rounded shadow">
-            <div class="border-b border-gray-400 p-4 flex justify-between items-center">
-                <span>項目名</span>
+        <div class="border border-gray-100 rounded shadow">
+            <div class="border-b border-gray-300 p-4 flex justify-between items-center">
+                <span class="ml-4">項目名</span>
                 <span class="absolute left-1/3">学習時間</span>
             </div>
             @if(isset($groupedLearningData[1]))
                 @foreach($groupedLearningData[1] as $data)
-                    <div class="mt-4 flex items-center border-b border-gray-400">
-                        <span class="px-4 pb-4">{{ $data->contents }}</span>
+                    <div class="mt-4 flex items-center border-b border-gray-300">
+                        <span class="px-4 pb-4 ml-4">{{ $data->contents }}</span>
                         <form action="{{ route('skills.update', $data->id) }}" method="POST" class="flex-grow -mt-12">
                             @csrf
                             @method('PUT')
                             <input type="number" name="study_time" class="mb-4 absolute left-1/3 w-40 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
-                            <button class="mb-4 absolute right-1/3 px-4 py-1 border border-custom-blue text-custom-blue rounded hover:bg-gray-200 cursor-pointer mr-2">学習時間を保存する</button>
+                            <button class="mb-4 absolute right-1/3 px-4 py-1 border border-custom-blue text-custom-blue rounded hover:bg-gray-200 cursor-pointer mr-8">学習時間を保存する</button>
                         </form>
                         <form action="{{ route('skills.destroy', $data->id) }}" method="POST" class="ml-2">
                             @csrf
@@ -71,25 +71,25 @@
     </div>
 
     <!-- フロントエンド -->
-    <div class="mx-20 mt-10 w-200 border border-gray-400 p-6 rounded">
+    <div class="mx-60 mt-10 w-200 border border-gray-400 p-6 rounded">
         <div class="flex items-center justify-between mb-6">
-            <h2 class="font-bold mb-6 border-b border-gray-500 pb-2" style="width: 30%;">フロントエンド</h2>
+            <h2 class="font-bold mb-6 border-b-2 border-gray-500 pb-2" style="width: 240px;">フロントエンド</h2>
             <button onclick="location.href='{{ route('skills.create', ['category' => 2, 'month' => $selectedMonth]) }}'" class="mb-4 bg-custom-blue text-white px-10 py-4 rounded hover:bg-cyan-900 cursor-pointer">項目を追加する</button>
         </div>
-        <div class="border border-gray-400 rounded shadow">
-            <div class="border-b border-gray-400 p-4 flex justify-between items-center">
-                <span>項目名</span>
+        <div class="border border-gray-100 rounded shadow">
+            <div class="border-b border-gray-300 p-4 flex justify-between items-center">
+                <span class="ml-4">項目名</span>
                 <span class="absolute left-1/3">学習時間</span>
             </div>
             @if(isset($groupedLearningData[2]))
                 @foreach($groupedLearningData[2] as $data)
-                    <div class="mt-4 flex items-center border-b border-gray-400">
-                        <span class="px-4 pb-4">{{ $data->contents }}</span>
+                    <div class="mt-4 flex items-center border-b border-gray-300">
+                        <span class="px-4 pb-4 ml-4">{{ $data->contents }}</span>
                         <form action="{{ route('skills.update', $data->id) }}" method="POST" class="flex-grow -mt-12">
                             @csrf
                             @method('PUT')
                             <input type="number" name="study_time" class="mb-4 absolute left-1/3 w-40 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
-                            <button class="mb-4 absolute right-1/3 px-4 py-1 border border-custom-blue text-custom-blue rounded hover:bg-gray-200 cursor-pointer mr-2">学習時間を保存する</button>
+                            <button class="mb-4 absolute right-1/3 px-4 py-1 border border-custom-blue text-custom-blue rounded hover:bg-gray-200 cursor-pointer mr-8">学習時間を保存する</button>
                         </form>
                         <form action="{{ route('skills.destroy', $data->id) }}" method="POST" class="ml-2">
                             @csrf
@@ -103,25 +103,25 @@
     </div>
 
     <!-- インフラ -->
-    <div class="mx-20 mt-10 w-200 border border-gray-400 p-6 rounded">
+    <div class="mx-60 mt-10 w-200 border border-gray-400 p-6 rounded">
         <div class="flex items-center justify-between mb-6">
-            <h2 class="font-bold mb-6 border-b border-gray-500 pb-2" style="width: 30%;">インフラ</h2>
+            <h2 class="font-bold mb-6 border-b-2 border-gray-500 pb-2" style="width: 240px;">インフラ</h2>
             <button onclick="location.href='{{ route('skills.create', ['category' => 3, 'month' => $selectedMonth]) }}'" class="mb-4 bg-custom-blue text-white px-10 py-4 rounded hover:bg-cyan-900 cursor-pointer">項目を追加する</button>
         </div>
-        <div class="border border-gray-400 rounded shadow">
-            <div class="border-b border-gray-400 p-4 flex justify-between items-center">
-                <span>項目名</span>
+        <div class="border border-gray-100 rounded shadow">
+            <div class="border-b border-gray-300 p-4 flex justify-between items-center">
+                <span class="ml-4">項目名</span>
                 <span class="absolute left-1/3">学習時間</span>
             </div>
             @if(isset($groupedLearningData[3]))
                 @foreach($groupedLearningData[3] as $data)
-                    <div class="mt-4 flex items-center border-b border-gray-400">
-                        <span class="px-4 pb-4">{{ $data->contents }}</span>
+                    <div class="mt-4 flex items-center border-b border-gray-300">
+                        <span class="px-4 pb-4 ml-4">{{ $data->contents }}</span>
                         <form action="{{ route('skills.update', $data->id) }}" method="POST" class="flex-grow -mt-12">
                             @csrf
                             @method('PUT')
                             <input type="number" name="study_time" class="mb-4 absolute left-1/3 w-40 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
-                            <button class="mb-4 absolute right-1/3 px-4 py-1 border border-custom-blue text-custom-blue rounded hover:bg-gray-200 cursor-pointer mr-2">学習時間を保存する</button>
+                            <button class="mb-4 absolute right-1/3 px-4 py-1 border border-custom-blue text-custom-blue rounded hover:bg-gray-200 cursor-pointer mr-8">学習時間を保存する</button>
                         </form>
                         <form action="{{ route('skills.destroy', $data->id) }}" method="POST" class="ml-2">
                             @csrf
