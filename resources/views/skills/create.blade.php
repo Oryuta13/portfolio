@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="flex flex-col min-h-full">
+<html lang="en" class="flex flex-col min-h-screen">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
     <title>項目追加</title>
 </head>
-<body class="flex flex-col min-h-full">
+<body class="flex flex-col min-h-screen">
     <!-- ヘッダー -->
     <div class="w-full h-[120px] px-10 bg-custom-blue flex justify-between items-center">
         <div class="text-white text-3xl font-bold font-['Roboto']">My Portfolio</div>
@@ -52,7 +52,7 @@
         <input type="hidden" name="study_date" value="{{ $selectedMonth }}">
 
         <!-- ボタン -->
-        <div class="text-center mt-20">
+        <div class="text-center mt-20 mb-20">
             <button type="submit" class="bg-custom-blue hover:bg-cyan-900 text-white font-normal py-4 px-20 rounded">追加する</button>
         </div>
     </form>
@@ -83,7 +83,7 @@
     </script>
     </div>
     <!-- footer -->
-    <div class="w-full h-[40px] px-10 mt-20 bg-custom-blue flex justify-center items-center">
+    <div class="w-full h-[40px] px-10 mt-auto bg-custom-blue flex justify-center items-center">
         <div class="text-white text-lg font-normal font-['Roboto']">portfolio site</div>
     </div>
     </body>

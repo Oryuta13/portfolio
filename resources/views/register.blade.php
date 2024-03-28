@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="flex flex-col min-h-full">
+<html lang="en" class="flex flex-col min-h-screen">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
     <title>新規登録</title>
 </head>
-<body class="flex flex-col min-h-full">
+<body class="flex flex-col min-h-screen">
     <!-- ヘッダー -->
     <div class="w-full h-[120px] px-10 bg-custom-blue flex justify-between items-center">
         <div class="text-white text-3xl font-bold font-['Roboto']">My Portfolio</div>
@@ -45,12 +45,12 @@
         </div>
         <!-- 登録ボタン -->
         <div class="flex justify-center items-center">
-            <button type="submit" class="mt-4 py-4 px-20 rounded-md bg-custom-blue hover:bg-cyan-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-900 text-white">登録する</button>
+            <button type="submit" class="mt-4 mb-20 py-4 px-20 rounded-md bg-custom-blue hover:bg-cyan-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-900 text-white">登録する</button>
         </div>
     </form>
     </div>
     <!-- フッター -->
-    <div class="w-full h-[40px] mt-40 px-10 bg-custom-blue flex justify-center items-center">
+    <div class="w-full h-[40px] mt-auto px-10 bg-custom-blue flex justify-center items-center">
         <div class="text-white text-lg font-normal font-['Roboto']">portfolio site</div>
     </div>
 </body>
