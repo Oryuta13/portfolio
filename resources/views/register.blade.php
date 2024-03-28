@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="h-full">
+<html lang="en" class="flex flex-col min-h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
     <title>新規登録</title>
 </head>
-<body class="flex flex-col h-full">
+<body class="flex flex-col min-h-full">
     <!-- ヘッダー -->
     <div class="w-full h-[120px] px-10 bg-custom-blue flex justify-between items-center">
         <div class="text-white text-3xl font-bold font-['Roboto']">My Portfolio</div>
