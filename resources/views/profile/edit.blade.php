@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="h-full">
+<html lang="en" class="flex flex-col min-h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
     <title>自己紹介編集</title>
 </head>
-<body class="flex flex-col h-full">
+<body class="flex flex-col min-h-full">
     <!-- ヘッダー -->
     <div class="w-full h-[120px] px-10 bg-custom-blue flex justify-between items-center">
         <div class="text-white text-3xl font-bold font-['Roboto']">My Portfolio</div>
@@ -41,9 +41,10 @@
                         <div class="w-[480px] border-b border-gray-700"></div>
                     </div>
                 </div>
-                <div class="justify-start items-center gap-2.5 inline-flex">
+                <!-- 不要なバリデーションメッセージ -->
+                <!-- <div class="justify-start items-center gap-2.5 inline-flex">
                     <div class="mt-2 text-gray-500 text-xs font-normal font-['Roboto'] leading-3 tracking-tight">50文字以上、200文字以下で入力してください</div>
-                </div>
+                </div> -->
                 <!-- バリデーションメッセージ -->
                 @error('introduction')
                     <div class="h-5 flex-col justify-start items-center gap-2.5 flex">
