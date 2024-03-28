@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="h-full">
+<html lang="en" class="flex flex-col min-h-screen">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
     <title>ログイン</title>
 </head>
-<body class="flex flex-col h-full">
+<body class="flex flex-col min-h-screen">
     <!-- ヘッダー -->
     <div class="w-full h-[120px] flex justify-center py-10 bg-custom-blue">
         <div class="text-white text-3xl font-bold font-['Roboto']">My Portfolio</div>
@@ -48,7 +48,7 @@
     </form>
     </div>
     <!-- フッター -->
-    <div class="w-full h-[40px] mt-40 px-10 bg-custom-blue flex justify-center items-center">
+    <div class="w-full h-[40px] mt-auto px-10 bg-custom-blue flex justify-center items-center">
         <div class="text-white text-lg font-normal font-['Roboto']">portfolio site</div>
     </div>
 </body>

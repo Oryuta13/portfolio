@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="flex flex-col min-h-full">
+<html lang="en" class="flex flex-col min-h-screen">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
     <title>自己紹介編集</title>
 </head>
-<body class="flex flex-col min-h-full">
+<body class="flex flex-col min-h-screen">
     <!-- ヘッダー -->
     <div class="w-full h-[120px] px-10 bg-custom-blue flex justify-between items-center">
         <div class="text-white text-3xl font-bold font-['Roboto']">My Portfolio</div>
@@ -95,14 +95,14 @@
             </script>
 
             <!-- 確定ボタン -->
-            <div class="mt-24 ml-24 bg-custom-blue rounded justify-center items-center inline-flex cursor-pointer hover:bg-cyan-900">
+            <div class="mt-24 mb-20 ml-20 bg-custom-blue rounded justify-center items-center inline-flex cursor-pointer hover:bg-cyan-900">
                 <button type="submit" class="px-20 py-4 text-white text-lg font-normal font-['Roboto']">自己紹介を確定する</button>
             </div>
         </form>
     </div>
     </div>
     <!-- footer -->
-    <div class="w-full h-[40px] px-10 mt-20 bg-custom-blue flex justify-center items-center">
+    <div class="w-full h-[40px] px-10 mt-auto bg-custom-blue flex justify-center items-center">
         <div class="text-white text-lg font-normal font-['Roboto']">portfolio site</div>
     </div>
 </body>
