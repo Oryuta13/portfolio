@@ -33,28 +33,23 @@ class UserController extends Controller
             'password.min' => '英数字8文字以上で入力してください',
             'password.regex' => '英数字8文字以上で入力してください',
         ]);
-
         // userを作成
         $user = User::query()->create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password'])
         ]);
-
         // 作成したuserにログイン
         Auth::login($user);
-
         // topページに飛ばす
         return redirect()->route('top');
     }
 
-    // topページに飛ばす
     public function top()
     {
         return view('top');
     }
 
-    // loginページに飛ぶ
     public function showLogin()
     {
         return view('login');
@@ -62,20 +57,24 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
+        $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
+        ], [
+            'email.required' => 'メールアドレスは必ず入力してください',
+            'email.email' => 'メールアドレスが正しい形式ではありません',
+            'password.required' => 'パスワードは必ず入力してください',
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
-
             return redirect()->intended('top');
         }
 
-        // ログインが失敗した場合、エラーメッセージをフラッシュメッセージで表示
-        Session::flash('loginError', 'メールアドレス、もしくはパスワードが間違っています');
-        return back();
+        // メールアドレスとパスワードが一致しない場合のエラーメッセージを設定
+        return back()->withErrors([
+            'loginError' => 'メールアドレス、もしくはパスワードが間違っています'
+        ]);
     }
 
     // logoutしたらloginページに飛ぶ
