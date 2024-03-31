@@ -20,7 +20,7 @@
 
     <!-- ドロップダウンボタン -->
     <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-black bg-white hover:bg-gray-100 font-bold text-sm px-4 py-2 text-center inline-flex items-center shadow rounded mx-60 mt-10" type="button">
-      {{ $selectedMonth ? $selectedMonth : $currentMonth }} <svg class="w-2 h-2 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+    {{ $selectedMonth ? $selectedMonth : $currentMonth }} <svg class="w-2 h-2 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
     </svg>
     </button>
@@ -39,98 +39,111 @@
     </div>
 
     <!-- バックエンド -->
-    <div class="mx-60  mt-10 w-200 border border-gray-400 p-6 rounded">
+    <div class="skill-section mx-60 mt-10 w-200 border border-gray-400 p-6 rounded">
         <div class="flex items-center justify-between mb-6">
             <h2 class="font-bold mb-6 border-b-2 border-gray-500 pb-2" style="width: 240px;">バックエンド</h2>
-            <a href="{{ route('skills.create', ['category' => 1, 'month' => $selectedMonth]) }}" class="mb-4 bg-custom-blue text-white px-10 py-4 rounded hover:bg-cyan-900 cursor-pointer">項目を追加する</a>
+            <button onclick="location.href='{{ route('skills.create', ['category' => 1, 'month' => $selectedMonth]) }}'" class="mb-4 bg-custom-blue text-white px-10 py-4 rounded hover:bg-cyan-900 cursor-pointer">項目を追加する</button>
         </div>
         <div class="border border-gray-100 rounded shadow">
             <div class="border-b border-gray-300 p-4 flex justify-between items-center">
-                <span class="ml-4">項目名</span>
-                <span class="absolute left-1/3">学習時間</span>
+                <span class="ml-4 w-1/5">項目名</span>
+                <span class="flex-grow">学習時間</span>
             </div>
-            @if(isset($groupedLearningData[1]))
-                @foreach($groupedLearningData[1] as $data)
-                    <div class="mt-4 flex items-center border-b border-gray-300">
-                        <span class="px-4 pb-4 ml-4">{{ $data->contents }}</span>
-                        <form action="{{ route('skills.update', $data->id) }}" method="POST" class="flex-grow -mt-12">
-                            @csrf
-                            @method('PUT')
-                            <input type="number" name="study_time" class="mb-4 absolute left-1/3 w-40 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
-                            <button class="mb-4 absolute right-1/3 px-4 py-1 border border-custom-blue text-custom-blue rounded hover:bg-gray-200 cursor-pointer mr-8">学習時間を保存する</button>
-                        </form>
-                        <form action="{{ route('skills.destroy', $data->id) }}" method="POST" class="ml-2">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="mb-4 ml-auto mr-10 px-4 py-1 bg-custom-red text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
-                        </form>
-                    </div>
-                @endforeach
-            @endif
+            <div class="overflow-auto max-h-[199px]">
+                @if(isset($groupedLearningData[1]))
+                    @foreach($groupedLearningData[1] as $data)
+                        <div class="skill-item flex items-center border-b border-gray-300 p-4">
+                            <span class="ml-4 w-1/5">{{ $data->contents }}</span>
+                            <form action="{{ route('skills.update', $data->id) }}" method="POST" class="flex-grow">
+                                @csrf
+                                @method('PUT')
+                                <div class="flex items-center space-x-20">
+                                    <input type="number" name="study_time" class="w-40 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
+                                    <button class="px-4 py-1 border border-custom-blue text-custom-blue rounded hover:bg-gray-200 cursor-pointer">学習時間を保存する</button>
+                                </div>
+                            </form>
+                            <form action="{{ route('skills.destroy', $data->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                    <button type="submit" class="px-4 py-1 bg-custom-red text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
+                            </form>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
         </div>
     </div>
 
+
     <!-- フロントエンド -->
-    <div class="mx-60 mt-10 w-200 border border-gray-400 p-6 rounded">
+    <div class="skill-section mx-60 mt-10 w-200 border border-gray-400 p-6 rounded">
         <div class="flex items-center justify-between mb-6">
             <h2 class="font-bold mb-6 border-b-2 border-gray-500 pb-2" style="width: 240px;">フロントエンド</h2>
             <button onclick="location.href='{{ route('skills.create', ['category' => 2, 'month' => $selectedMonth]) }}'" class="mb-4 bg-custom-blue text-white px-10 py-4 rounded hover:bg-cyan-900 cursor-pointer">項目を追加する</button>
         </div>
         <div class="border border-gray-100 rounded shadow">
             <div class="border-b border-gray-300 p-4 flex justify-between items-center">
-                <span class="ml-4">項目名</span>
-                <span class="absolute left-1/3">学習時間</span>
+                <span class="ml-4 w-1/5">項目名</span>
+                <span class="flex-grow">学習時間</span>
             </div>
-            @if(isset($groupedLearningData[2]))
-                @foreach($groupedLearningData[2] as $data)
-                    <div class="mt-4 flex items-center border-b border-gray-300">
-                        <span class="px-4 pb-4 ml-4">{{ $data->contents }}</span>
-                        <form action="{{ route('skills.update', $data->id) }}" method="POST" class="flex-grow -mt-12">
-                            @csrf
-                            @method('PUT')
-                            <input type="number" name="study_time" class="mb-4 absolute left-1/3 w-40 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
-                            <button class="mb-4 absolute right-1/3 px-4 py-1 border border-custom-blue text-custom-blue rounded hover:bg-gray-200 cursor-pointer mr-8">学習時間を保存する</button>
-                        </form>
-                        <form action="{{ route('skills.destroy', $data->id) }}" method="POST" class="ml-2">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="mb-4 ml-auto mr-10 px-4 py-1 bg-custom-red text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
-                        </form>
-                    </div>
-                @endforeach
-            @endif
+            <div class="overflow-auto max-h-[199px]">
+                @if(isset($groupedLearningData[2]))
+                    @foreach($groupedLearningData[2] as $data)
+                        <div class="skill-item flex items-center border-b border-gray-300 p-4">
+                            <span class="ml-4 w-1/5">{{ $data->contents }}</span>
+                            <form action="{{ route('skills.update', $data->id) }}" method="POST" class="flex-grow">
+                                @csrf
+                                @method('PUT')
+                                <div class="flex items-center space-x-20">
+                                    <input type="number" name="study_time" class="w-40 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
+                                    <button class="px-4 py-1 border border-custom-blue text-custom-blue rounded hover:bg-gray-200 cursor-pointer">学習時間を保存する</button>
+                                </div>
+                            </form>
+                            <form action="{{ route('skills.destroy', $data->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                    <button type="submit" class="px-4 py-1 bg-custom-red text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
+                            </form>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
         </div>
     </div>
 
     <!-- インフラ -->
-    <div class="mx-60 mt-10 w-200 border border-gray-400 p-6 rounded">
+    <div class="skill-section mx-60 mt-10 w-200 border border-gray-400 p-6 rounded">
         <div class="flex items-center justify-between mb-6">
             <h2 class="font-bold mb-6 border-b-2 border-gray-500 pb-2" style="width: 240px;">インフラ</h2>
             <button onclick="location.href='{{ route('skills.create', ['category' => 3, 'month' => $selectedMonth]) }}'" class="mb-4 bg-custom-blue text-white px-10 py-4 rounded hover:bg-cyan-900 cursor-pointer">項目を追加する</button>
         </div>
         <div class="border border-gray-100 rounded shadow">
             <div class="border-b border-gray-300 p-4 flex justify-between items-center">
-                <span class="ml-4">項目名</span>
-                <span class="absolute left-1/3">学習時間</span>
+                <span class="ml-4 w-1/5">項目名</span>
+                <span class="flex-grow">学習時間</span>
             </div>
-            @if(isset($groupedLearningData[3]))
-                @foreach($groupedLearningData[3] as $data)
-                    <div class="mt-4 flex items-center border-b border-gray-300">
-                        <span class="px-4 pb-4 ml-4">{{ $data->contents }}</span>
-                        <form action="{{ route('skills.update', $data->id) }}" method="POST" class="flex-grow -mt-12">
-                            @csrf
-                            @method('PUT')
-                            <input type="number" name="study_time" class="mb-4 absolute left-1/3 w-40 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
-                            <button class="mb-4 absolute right-1/3 px-4 py-1 border border-custom-blue text-custom-blue rounded hover:bg-gray-200 cursor-pointer mr-8">学習時間を保存する</button>
-                        </form>
-                        <form action="{{ route('skills.destroy', $data->id) }}" method="POST" class="ml-2">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="mb-4 ml-auto mr-10 px-4 py-1 bg-custom-red text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
-                        </form>
-                    </div>
-                @endforeach
-            @endif
+            <div class="overflow-auto max-h-[199px]">
+                @if(isset($groupedLearningData[3]))
+                    @foreach($groupedLearningData[3] as $data)
+                        <div class="skill-item flex items-center border-b border-gray-300 p-4">
+                            <span class="ml-4 w-1/5">{{ $data->contents }}</span>
+                            <form action="{{ route('skills.update', $data->id) }}" method="POST" class="flex-grow">
+                                @csrf
+                                @method('PUT')
+                                <div class="flex items-center space-x-20">
+                                    <input type="number" name="study_time" class="w-40 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
+                                    <button class="px-4 py-1 border border-custom-blue text-custom-blue rounded hover:bg-gray-200 cursor-pointer">学習時間を保存する</button>
+                                </div>
+                            </form>
+                            <form action="{{ route('skills.destroy', $data->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                    <button type="submit" class="px-4 py-1 bg-custom-red text-white rounded hover:bg-red-600 cursor-pointer">削除する</button>
+                            </form>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
         </div>
     </div>
 
@@ -161,7 +174,11 @@
 
     <!-- footer -->
     <div class="w-full h-[40px] px-10 mt-20 bg-custom-blue flex justify-center items-center">
-        <div class="text-white text-lg font-normal font-['Roboto']">portfolio site</div>
+        @auth
+            <div class="text-white text-lg font-normal font-['Roboto']">{{ Auth::user()->name }}</div>
+        @else
+            <div class="text-white text-lg font-normal font-['Roboto']">portfolio site</div>
+        @endauth
     </div>
 
     <!-- ドロップダウンボタンがクリックされた時、表示/非表示を切り替える -->
@@ -171,6 +188,18 @@
 
         dropdownButton.addEventListener('click', () => {
             dropdownMenu.classList.toggle('hidden');
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.skill-section').forEach(section => {
+                // 各セクション内の項目数を確認
+                if (section.querySelectorAll('.skill-item').length > 3) {
+                    section.querySelector('.overflow-auto').classList.add('scrollable');
+                } else {
+                    section.querySelector('.overflow-auto').classList.remove('scrollable');
+                }
+            });
         });
     </script>
 </body>
