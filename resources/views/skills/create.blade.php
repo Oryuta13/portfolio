@@ -82,9 +82,14 @@
       }
     </script>
     </div>
+
     <!-- footer -->
     <div class="w-full h-[40px] px-10 mt-auto bg-custom-blue flex justify-center items-center">
-        <div class="text-white text-lg font-normal font-['Roboto']">portfolio site</div>
+        @auth
+            <div class="text-white text-lg font-normal font-['Roboto']">{{ Auth::user()->name }}</div>
+        @else
+            <div class="text-white text-lg font-normal font-['Roboto']">portfolio site</div>
+        @endauth
     </div>
     </body>
 </html>
