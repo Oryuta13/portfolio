@@ -49,7 +49,7 @@
                 <span class="ml-4 w-1/4">項目名</span>
                 <span class="flex-grow">学習時間</span>
             </div>
-            <div class="overflow-auto max-h-[198px]">
+            <div class="overflow-auto max-h-[197px]">
                 @if(isset($groupedLearningData[1]))
                     @foreach($groupedLearningData[1] as $data)
                         <div class="skill-item flex items-center border-b border-gray-300 p-4">
@@ -57,7 +57,7 @@
                             <form action="{{ route('skills.update', $data->id) }}" method="POST" class="flex-grow">
                                 @csrf
                                 @method('PUT')
-                                <div class="flex items-center space-x-28">
+                                <div class="flex items-center space-x-52">
                                     <input type="number" name="study_time" class="w-50 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
                                     <button class="px-4 py-1 border border-custom-blue text-custom-blue rounded hover:bg-gray-200 cursor-pointer">学習時間を保存する</button>
                                 </div>
@@ -86,7 +86,7 @@
                 <span class="ml-4 w-1/4">項目名</span>
                 <span class="flex-grow">学習時間</span>
             </div>
-            <div class="overflow-auto max-h-[198px]">
+            <div class="overflow-auto max-h-[197px]">
                 @if(isset($groupedLearningData[2]))
                     @foreach($groupedLearningData[2] as $data)
                         <div class="skill-item flex items-center border-b border-gray-300 p-4">
@@ -94,7 +94,7 @@
                             <form action="{{ route('skills.update', $data->id) }}" method="POST" class="flex-grow">
                                 @csrf
                                 @method('PUT')
-                                <div class="flex items-center space-x-28">
+                                <div class="flex items-center space-x-52">
                                     <input type="number" name="study_time" class="w-50 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
                                     <button class="px-4 py-1 border border-custom-blue text-custom-blue rounded hover:bg-gray-200 cursor-pointer">学習時間を保存する</button>
                                 </div>
@@ -122,7 +122,7 @@
                 <span class="ml-4 w-1/4">項目名</span>
                 <span class="flex-grow">学習時間</span>
             </div>
-            <div class="overflow-auto max-h-[198px]">
+            <div class="overflow-auto max-h-[197px]">
                 @if(isset($groupedLearningData[3]))
                     @foreach($groupedLearningData[3] as $data)
                         <div class="skill-item flex items-center border-b border-gray-300 p-4">
@@ -130,7 +130,7 @@
                             <form action="{{ route('skills.update', $data->id) }}" method="POST" class="flex-grow">
                                 @csrf
                                 @method('PUT')
-                                <div class="flex items-center space-x-28">
+                                <div class="flex items-center space-x-52">
                                     <input type="number" name="study_time" class="w-50 border border-gray-400 rounded px-2 py-1" min="0" step="1" value="{{ $data->study_time }}">
                                     <button class="px-4 py-1 border border-custom-blue text-custom-blue rounded hover:bg-gray-200 cursor-pointer">学習時間を保存する</button>
                                 </div>
