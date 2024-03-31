@@ -49,7 +49,7 @@
                 <span class="ml-4 w-1/4">項目名</span>
                 <span class="flex-grow">学習時間</span>
             </div>
-            <div class="overflow-auto max-h-[200px]">
+            <div class="overflow-auto max-h-[201px]">
                 @if(isset($groupedLearningData[1]))
                     @foreach($groupedLearningData[1] as $data)
                         <div class="skill-item flex items-center border-b border-gray-300 p-4">
@@ -86,7 +86,7 @@
                 <span class="ml-4 w-1/4">項目名</span>
                 <span class="flex-grow">学習時間</span>
             </div>
-            <div class="overflow-auto max-h-[200px]">
+            <div class="overflow-auto max-h-[201px]">
                 @if(isset($groupedLearningData[2]))
                     @foreach($groupedLearningData[2] as $data)
                         <div class="skill-item flex items-center border-b border-gray-300 p-4">
@@ -122,7 +122,7 @@
                 <span class="ml-4 w-1/4">項目名</span>
                 <span class="flex-grow">学習時間</span>
             </div>
-            <div class="overflow-auto max-h-[200px]">
+            <div class="overflow-auto max-h-[201px]">
                 @if(isset($groupedLearningData[3]))
                     @foreach($groupedLearningData[3] as $data)
                         <div class="skill-item flex items-center border-b border-gray-300 p-4">
